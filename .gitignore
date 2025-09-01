@@ -10,6 +10,11 @@ engine/shaders/makevulkanblob
 engine/shaders/vulkanblobs/
 plugins/cef/cef_linux64/
 plugins/cef/cef_windows64/
+zlib-1.3.1.tar.gz.1
+build.ninja
+cmake_install.cmake
+CMakeCache.txt
+CMakeFiles
 
 #quakec build artifacts...
 quakec/csaddon/csaddon.dat

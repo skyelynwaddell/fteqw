@@ -1,14 +1,36 @@
-# FTEQW 
+# FTEQW Vector0
 
 Join the FTEQW Discord Server: https://discord.gg/rm4V72Skgb
 
-Yay, you found out the secrit location to download the sauce code from!
-Right, urm, now what?
-Yeah, good question.
-Urm.
+This is the fork of FTEQW game engine with configs & customizations for vector0:fte
 
+### Compiling against SDL3 - Linux Executable
+```c
+cd engine
+make clean 
+make FTE_TARGET=SDL3 makelibs -j8 && make FTE_CONFIG=vector0 FTE_TARGET=SDL3 m-rel -j8
+```
 
-### Quick start guide:
+### Compiling against SDL3 - Windows Executable
+```c
+// Download MSYS2 Shell
+// Run MINGW64 Terminal
+
+// Install Windows Dependencies
+pacman -Syu
+pacman -S make
+pacman -S --needed base-devel mingw-w64-x86_64-toolchain
+pacman -S mingw-w64-x86_64-cmake
+pacman -S --needed base-devel automake autoconf libtool
+pacman -S mingw-w64-x86_64-libusb
+
+// Install FTEQW
+cd engine
+make clean 
+make FTE_TARGET=win64_SDL3 makelibs -j8 && make FTE_CONFIG=vector0 FTE_TARGET=win64_SDL3 m-rel -j8
+```
+
+### Old Quick start guide (this backend doesnt have good controller support... use SDL3 ^^^):
 ```c
 cd engine
 make sv-rel -j4
@@ -17,15 +39,25 @@ cd  ..
 engine/release/fteqw.sv -nohome -basedir ~/quake
 engine/release/fteqw.gl -nohome -basedir ~/quake
 ```
-
-
-### Compiling against SDL3
-```c
-make clean //cause you probably already compiled and now want to switch to sdl3
-make FTE_TARGET=SDL3 makelibs -j8 && make FTE_CONFIG=fteqw FTE_TARGET=SDL3 m-rel -j8
-```
 <b>You do not need to configure. The makefile will automatically do that depending on the target build/system.</b>
 
+
+### Release Options
+```c
+releases:
+	#this is for releasing things from a linux box
+	#just go through compiling absolutly everything
+	-$(MAKE) FTE_TARGET=linux32 rel
+	-$(MAKE) FTE_TARGET=linux64 rel
+	-$(MAKE) FTE_TARGET=win32 rel
+	-$(MAKE) FTE_TARGET=win64 rel
+	-$(MAKE) FTE_TARGET=win32_SDL rel
+	-$(MAKE) FTE_TARGET=win64_SDL rel
+	-$(MAKE) FTE_TARGET=morphos rel
+	-$(MAKE) FTE_TARGET=macosx rel
+	-$(MAKE) droid-rel
+	-$(MAKE) web-rel
+```
 
 ### Easy Build Bot System:
 If you want to set up a linux box that cross-compiles each target with your own private customisations, then you can run the `build_setup.sh` script to set up which targets you wish to support.
