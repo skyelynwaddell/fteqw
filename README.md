@@ -12,8 +12,7 @@ make clean
 make FTE_TARGET=SDL3 makelibs -j8 && make FTE_CONFIG=vector0 FTE_TARGET=SDL3 m-rel -j8
 ```
 
-### Compiling for Windows on WSL
-#### [tested on: Windows 11]
+### Compiling for Windows on WSL Ubuntu
 #### Install dependencies & then build
 ```c
 sudo apt install make
