@@ -5,13 +5,40 @@ Join the FTEQW Discord Server: https://discord.gg/rm4V72Skgb
 This is the fork of FTEQW game engine with configs & customizations for vector0:fte
 
 ### Compiling against SDL3 - Linux Executable
+#### [tested on: ubuntu 22, 24]
 ```c
 cd engine
 make clean 
 make FTE_TARGET=SDL3 makelibs -j8 && make FTE_CONFIG=vector0 FTE_TARGET=SDL3 m-rel -j8
 ```
 
+### Compiling for Windows on WSL
+#### [tested on: Windows 11]
+#### Install dependencies & then build
+```c
+sudo apt install make
+sudo apt install cmake build-essential
+sudo apt install mingw-w64
+
+cd /mnt/c/Users/skyes/Documents/fteqw/engine/libs-x86_64-w64-mingw32/SDL3-3.2.10
+rm -rf CMakeCache.txt CMakeFiles
+
+make makelibs
+
+git config --global --add safe.directory /mnt/c/Users/skyes/Documents/fteqw
+
+sudo apt install mingw-w64-x86-64-dev pkg-config
+
+export PKG_CONFIG=x86_64-w64-mingw32-pkg-config
+sudo ln -s $(which pkg-config) /usr/local/bin/x86_64-w64-mingw32-pkg-config
+
+make FTE_TARGET=win64_SDL3 makelibs -j8 && make FTE_CONFIG=vector0 FTE_TARGET=win64_SDL3 m-rel -j8
+```
+
+
+
 ### Compiling against SDL3 - Windows Executable
+#### [tested on: windows 11]
 ```c
 // Download MSYS2 Shell
 // Run MINGW64 Terminal

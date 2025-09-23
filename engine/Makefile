@@ -1511,7 +1511,13 @@ ifeq (win,$(findstring win,$(FTE_TARGET))$(findstring _SDL,$(FTE_TARGET)))
 	# The extra object file called resources.o is specific for MinGW to link the icon in
 #	DO_CMAKE+=-DCMAKE_SYSTEM_NAME=Windows -DCMAKE_FIND_ROOT_PATH_MODE_PROGRAM="NEVER"
 
-	DO_CMAKE=cmake -DCMAKE_TOOLCHAIN_FILE=/home/spike/fteqw/fteqw-code/cmakesucks.cmake -DBUILD_SHARED_LIBS=OFF -DCMAKE_SYSTEM_NAME=Windows -DCMAKE_C_COMPILER="$(firstword $(CC))" -DCMAKE_C_FLAGS="$(wordlist 2,99,$(CC))" -DCMAKE_CXX_COMPILER="$(firstword $(CXX))" -DCMAKE_CXX_FLAGS="$(wordlist 2,99,$(CXX))" 
+	DO_CMAKE=cmake \
+    -DCMAKE_SYSTEM_NAME=Windows \
+    -DCMAKE_C_COMPILER=x86_64-w64-mingw32-gcc \
+    -DCMAKE_C_FLAGS="$(wordlist 2,99,$(CC)) $(CPUOPTIMIZATIONS)" \
+    -DCMAKE_CXX_COMPILER=x86_64-w64-mingw32-g++ \
+    -DCMAKE_CXX_FLAGS="$(wordlist 2,99,$(CXX)) $(CPUOPTIMIZATIONS)" \
+    -DBUILD_SHARED_LIBS=OFF
 
 	#cygwin's gcc requires an extra command to use mingw instead of cygwin (default paths, etc).
 	ifneq ($(shell $(CC) -dumpmachine 2>&1 | grep cygwin),)
