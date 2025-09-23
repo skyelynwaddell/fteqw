@@ -23,7 +23,7 @@ sudo apt install mingw-w64
 cd /mnt/c/Users/skyes/Documents/fteqw/engine/libs-x86_64-w64-mingw32/SDL3-3.2.10
 rm -rf CMakeCache.txt CMakeFiles
 
-make makelibs
+make makelibs FTE_TARGET=win64
 
 git config --global --add safe.directory /mnt/c/Users/skyes/Documents/fteqw
 
